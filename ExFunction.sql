@@ -12,7 +12,7 @@ ON E.IDEvento = EP.IDEvento
 GROUP BY E.Descricao, S.Nome, E.DtHrInicio
 ORDER BY E.DtHrInicio ASC
 
-CREATE FUNCTION fSelect (@EVENTO VARCHAR)
+ALTER FUNCTION fSelect (@EVENTO VARCHAR)
 RETURNS TABLE AS
 RETURN (
 	SELECT TOP 1
@@ -23,6 +23,7 @@ RETURN (
 	ON E.IDSala = S.IDSala
 	INNER JOIN EventoPessoa EP
 	ON EP.IDEvento = E.IDEvento
+	WHERE E.Descricao LIKE @EVENTO + '%'
 	GROUP BY S.Nome, E.DtHrInicio
 	ORDER BY E.DtHrInicio
 )
