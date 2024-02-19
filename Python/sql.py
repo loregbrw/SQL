@@ -7,7 +7,16 @@ cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';
 
 cursor = cnxn.cursor()
 
-cursor.execute("CREATE TABLE ALUNO (ID INT, NOME VARCHAR(200))") 
+cursor.execute("SELECT * FROM ALUNO") 
+
+row = cursor.fetchone()
+
+while row: 
+    for i in row:
+        print(i)
+    row = cursor.fetchone()
+
+
 cursor.commit()
 
 print("Inserido com sucesso!")
